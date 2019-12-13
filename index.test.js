@@ -4,18 +4,16 @@ const formatData = require('./format.js');
 jest.mock('./format.js', () => jest.fn().mockName('formatData'));
 
 describe('test', () => {
-  test('handleUpdates', async () => {
+  test('handleUpdates', () => {
     const testObject = {
       propOne: 1,
       propTwo: 2
     };
 
-    await makeCall.handleUpdates(testObject);
-    expect(formatData).toHaveBeenCalledTimes(1)
+    makeCall.handleUpdates(testObject);
 
-
-    const results = formatData.mock.calls[0][0];
-    console.log(results)
+    // This fails because it expects the object formatData was called with to have a property called "extraField".
+    // The "extraField" property was added after the call to formatData.
     expect(formatData).toHaveBeenCalledWith({
       propOne: 1,
       propTwo: 2,
